@@ -13,3 +13,5 @@ lookup table
 pipe
 executors
 cluster manager
+RDD
+join sql table and hive table
