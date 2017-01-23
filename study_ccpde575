@@ -4,6 +4,7 @@ Data Ingest
   Import and export data between an external RDBMS and your cluster, including the ability to import specific subsets, change the delimiter and file format of imported data during ingest, and alter the data access pattern or privileges.
   Ingest real-time and near-real time (NRT) streaming data into HDFS, including the ability to distribute to multiple data sources and convert data on ingest from one format to another.
   Load data into and out of HDFS using the Hadoop File System (FS) commands.
+
 Transform, Stage, Store
   Convert a set of data values in a given format stored in HDFS into new data values and/or a new data format and write them into HDFS or Hive/HCatalog. This includes the following skills:
 
@@ -17,6 +18,7 @@ Transform, Stage, Store
   Evolve an Avro or Parquet schema
   Partition an existing data set according to one or more partition keys
   Tune data for optimal query performance
+
 Data Analysis
   Filter, sort, join, aggregate, and/or transform one or more data sets in a given format stored in HDFS to produce a specified result. All of these tasks may include reading from Parquet, Avro, JSON, delimited text, and natural language text. The queries will include complex data types (e.g., array, map, struct), the implementation of external libraries, partitioned data, compressed data, and require the use of metadata from Hive/HCatalog.
 
@@ -26,6 +28,7 @@ Data Analysis
   Write a query that produces ranked or sorted data
   Write a query that joins multiple data sets
   Read and/or create a Hive or an HCatalog table from existing data in HDFS
+  
 Workflow
   The ability to create and execute various jobs and actions that move data towards greater value and use in a system. This includes the following skills:
 

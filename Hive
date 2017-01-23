@@ -1,0 +1,7 @@
+Instruct hive to dynamically load partitions
+
+SET hive.exec.dynamic.partition = true;
+
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+---------------------
