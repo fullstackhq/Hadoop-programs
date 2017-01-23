@@ -1,0 +1,15 @@
+cache
+persists
+lineage graph
+map
+flatmap
+reduce
+pair rdd
+reducebykey
+join
+accumulators
+brodcast variables
+lookup table
+pipe
+executors
+cluster manager
