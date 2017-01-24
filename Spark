@@ -2,7 +2,16 @@ cache
 persists
 lineage graph
 map
-flatmap
+javaRDD
+  -flatmap - to apply on the entire file ( to split line into words)
+    * JavaRDD<U> flatMap(FlatMapFunction<T,U> f)
+    - flatmapfunction - A function that returns zero or more output records from each input record.
+      * Iterable<R> call(T t)
+      * new flatmapfunction<String,String>{public iterable<String> call(String x) {return Arrays.asList(x.split(" ")}}
+javapairRDD
+  -maptopair
+  * JavaPairRDD<K2,V2> mapToPair(PairFunction<T,K2,V2> f)
+    - 
 reduce
 pair rdd
 reducebykey
@@ -15,3 +24,6 @@ executors
 cluster manager
 RDD
 join sql table and hive table
+maptopair
+javaRDD
+
