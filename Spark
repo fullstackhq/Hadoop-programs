@@ -26,4 +26,12 @@ RDD
 join sql table and hive table
 maptopair
 javaRDD
+repartition
+coalesce
+preferred location
+driver
+master
+dag scheduler
+blockmanager
+
 
