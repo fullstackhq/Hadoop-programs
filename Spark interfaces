@@ -2,6 +2,13 @@ Function name                 Method to implement                 Usage
 -------------                 --------------------          ---------------------
 Function<T, R>                R call(T)                     Take in one input and return one output, for use with
                                                             operations like map() and filter().
+      JavaRDD<String> inputRDD = sc.textFile("log.txt");
+      JavaRDD<String> errorsRDD = inputRDD.filter(
+      new Function<String, Boolean>() {
+      public Boolean call(String x) { return x.contains("error"); }
+      } });
+      ______________________________________________________________
+
 Function2<T1, T2, R>          R call(T1, T2)                Take in two inputs and return one output, for use with
                                                             operations like aggregate() or fold().
 FlatMapFunction<T,R>          Iterable<R>call(T)            Take in one input and return zero or more outputs, for use with
@@ -11,14 +18,14 @@ DoubleFlatMapFunction<T>      Function<T, Iterable<Double>> DoubleRDD from a fla
 DoubleFunction<T>             Function<T, double>           DoubleRDD from map ToDouble
 
 PairFlatMapFunction<T, K, V>  Function<T,                   PairRDD<K, V> from a flatMapToPair
-                              Iterable<Tuple2<K, V>>> 
-                              
+                              Iterable<Tuple2<K, V>>>
+
 PairFunction<T, K, V>         Function<T, Tuple2<K, V>>     PairRDD<K, V> from a mapToPair
 -------------------------------------------------------------------------
 
 ------------------------------------------------------------!
 Basic RDD transformations on an RDD containing {1, 2, 3, 3} !
-____________________________________________________________!__________________________________________________________________________  
+____________________________________________________________!__________________________________________________________________________
 Function name               Purpose                             Example                                 Result
 ______________________________________________________________________________________________________________________________________
 map()                 Apply a function to each                  rdd.map(x => x + 1)                     {2, 3, 4, 4}
@@ -102,10 +109,8 @@ union()                Produce an RDD containing elements       rdd.union(other)
 
 intersection()         RDD containing only elements found       rdd.intersection(other)                 {3}
                        inboth RDDs.
-                       
+
 subtract()             Remove the contents of one RDD (e.g.,    rdd.subtract(other)                     {1, 2}
                        remove training data).
 
 cartesian()            Cartesian product with the other RDD.    rdd.cartesian(other)                    {(1, 3), (1,4), … (3,5)}
-
-
