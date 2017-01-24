@@ -1,0 +1,56 @@
+Function name               Method to implement                 Usage
+-------------               --------------------          ---------------------
+Function<T, R>              R call(T)                     Take in one input and return one output, for use with
+                                                          operations like map() and filter().
+Function2<T1, T2, R>        R call(T1, T2)                Take in two inputs and return one output, for use with
+                                                          operations like aggregate() or fold().
+FlatMapFunction<T,R>        Iterable<R>call(T)            Take in one input and return zero or more outputs, for use with
+                                                          operations like flatMap().
+
+-------------------------------------------------------------------------
+
+------------------------------------------------------------!
+Basic RDD transformations on an RDD containing {1, 2, 3, 3} !
+____________________________________________________________!__________________________________________________________________________  
+Function name               Purpose                             Example                                 Result
+______________________________________________________________________________________________________________________________________
+map()                 Apply a function to each                  rdd.map(x => x + 1)                     {2, 3, 4, 4}
+                      element in the RDD and return
+                      an RDD of the result.
+
+flatMap()             Apply a function to each                  rdd.flatMap(x => x.to(3))               {1, 2, 3, 2, 3, 3, 3}
+                      element in the RDD and return
+                      an RDD of the contents of the
+                      iterators returned. Often used to
+                      extract words.
+
+filter()              Return an RDD consisting of only          rdd.filter(x => x != 1)                 {2, 3, 3}
+                      elements that pass the condition
+                      passed to filter().
+
+distinct()            Remove duplicates.                        rdd.distinct()                          {1, 2, 3}
+
+sample(withRe         Sample an RDD, with or without            rdd.sample(false, 0.5)                  Nondeterministic
+placement, frac       replacement.
+tion, [seed])
+
+_____________________________________________________________________________________________________________________________________
+
+Two-RDD transformations on RDDs containing {1, 2, 3} and {3, 4, 5}
+_____________________________________________________________________________________________________________________________________
+
+Function name               Purpose                             Example                                 Result
+
+union()                Produce an RDD containing elements       rdd.union(other)                        {1, 2, 3, 3, 4, 5}
+                       from both RDDs.
+
+
+intersection()         RDD containing only elements found       rdd.intersection(other)                 {3}
+                       inboth RDDs.
+                       
+subtract()             Remove the contents of one RDD (e.g.,    rdd.subtract(other)                     {1, 2}
+                       remove training data).
+
+cartesian()            Cartesian product with the other RDD.    rdd.cartesian(other)                    {(1, 3), (1,4), … (3,5)}
+
+
