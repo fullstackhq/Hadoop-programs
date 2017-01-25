@@ -71,27 +71,14 @@ num, [seed])
 
 reduce(func)          Combine the elements of theRDD            rdd.reduce((x, y) => x + y)             9
                       together in parallel (e.g., sum).
-fold(zero)(func) Same as
-reduce() but
-with the provided
-zero value.
-rdd.fold(0)((x, y) => x + y) 9
-aggregate(zeroValue)
-(seqOp, combOp)
-Similar to
-reduce() but
-used to return a
-different type.
-rdd.aggregate((0, 0))
-((x, y) =>
-(x._1 + y, x._2 + 1),
-(x, y) =>
-(x._1 + y._1, x._2 + y._2))
-(9, 4)
-foreach(func) Apply the provided
-function to each
-element of the
-RDD.
+fold(zero)(func)      Same as reduce() but with the provided    rdd.fold(0)((x, y) => x + y)            9
+                      zero value.
+
+aggregate(zeroValue)  Similar to reduce() but used to return a  rdd.aggregate((0, 0))((x, y) =>         (9, 4)
+(seqOp, combOp)       different type.                           (x._1 + y, x._2 + 1),
+                                                                (x, y) =>(x._1 + y._1, x._2 + y._2))
+
+foreach(func)         Apply the provided function to each element of the RDD.
 
 _____________________________________________________________________________________________________________________________________
 
