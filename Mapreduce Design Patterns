@@ -1,2 +1,6 @@
 1. WordCount
-2. Inverted Index 
+2. Inverted Index
+3. Lat/Long to Postal Address using an external library
+4. Length of words
+5. Purge bad records from a data set, e.g., null values
+6. Write your data with compression

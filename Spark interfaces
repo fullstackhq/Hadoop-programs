@@ -2,6 +2,8 @@ Function name                 Method to implement                 Usage
 -------------                 --------------------          ---------------------
 Function<T, R>                R call(T)                     Take in one input and return one output, for use with
                                                             operations like map() and filter().
+      ______________________________________________________________
+
       JavaRDD<String> inputRDD = sc.textFile("log.txt");
       JavaRDD<String> errorsRDD = inputRDD.filter(
       new Function<String, Boolean>() {
@@ -63,17 +65,12 @@ top(num)              Return the top num elements the RDD.      rdd.top(2)      
 takeOrdered(num)      Return num elements based on provided     rdd.takeOrdered(2)(myOrdering)          {3, 3}
 (ordering)            ordering.
 
-takeSample(withReplace
-ment, num, [seed])
-Return num
-elements at
-random.
-rdd.takeSample(false, 1) Nondeterministic
-reduce(func) Combine the
-elements of the
-RDD together in
-parallel (e.g., sum).
-rdd.reduce((x, y) => x + y) 9
+takeSample(           Return num elements at random.            rdd.takeSample(false, 1)                Nondeterministic
+withReplacement,
+num, [seed])
+
+reduce(func)          Combine the elements of theRDD            rdd.reduce((x, y) => x + y)             9
+                      together in parallel (e.g., sum).
 fold(zero)(func) Same as
 reduce() but
 with the provided

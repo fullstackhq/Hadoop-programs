@@ -28,7 +28,7 @@ Data Analysis
   Write a query that produces ranked or sorted data
   Write a query that joins multiple data sets
   Read and/or create a Hive or an HCatalog table from existing data in HDFS
-  
+
 Workflow
   The ability to create and execute various jobs and actions that move data towards greater value and use in a system. This includes the following skills:
 
