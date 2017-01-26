@@ -1,1 +1,10 @@
-Scenario 1 :
+When the jar is not running giveing error as ->
+
+  -->Exception in thread "main" java.lang.SecurityException: Invalid signature file digest for Manifest main attributes
+
+  zip -d /Users/janakiraman/Documents/workspace/spark-examples/out/artifacts/spark_examples_jar/spark-examples.jar META-INF/*.RSA META-INF/*.DSA META-INF/*.SF
+
+Spark submit java code:
+
+  ./spark-submit --class org.sparkexample.WordCount --master local[2] /Users/janakiraman/Documents/workspace/spark-examples/out/artifacts/spark_examples_jar/spark-examples.jar /Users/janakiraman/Desktop/students.txt /Users/janakiraman/Desktop/newlen
+ 

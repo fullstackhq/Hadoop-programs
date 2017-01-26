@@ -1,2 +1,11 @@
->>> Import data from a MySQL database into HDFS using Sqoop
-    
+>>>   Import data from a MySQL database into HDFS using Sqoop
+
+  -> sqoop import --connect jdbc:mysql://localhost/sqoopdb -username root -password root -table emp -m 1 --target-dir /jhony/emp
+
+>>>   Export data to a MySQL database from HDFS using Sqoop
+
+  -> sqoop export -connect jdbc:mysql://localhost/sqoopdb --table emp --export-dir /jhony/emp --username root --password root -m 1 --input-fields-terminated-by ','
+
+>>>   Change the delimiter and file format of data during import using Sqoop
+
+  -> sqoop import --connect jdbc:mysql://localhost/sqoopdb -username root -password root -table emp --fields-terminated-by '?' -m 1 --target-dir /jhony/emp5
