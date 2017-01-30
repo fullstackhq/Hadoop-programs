@@ -1,0 +1,35 @@
+  val sqlContext= new org.apache.spark.sql.SQLContext(sc)
+
+  import sqlContext.implicits._
+
+    val colleges = sc.textFile("/Users/janakiraman/Desktop/clg.txt")
+
+    val cschemaString = "College city"
+
+    val students = sc.textFile("/Users/janakiraman/Desktop/student.txt")
+
+    val sschemaString = "Student college"
+
+  import org.apache.spark.sql._
+
+    val cschema = StructType(cschemaString.split(" ").map(fieldName => StructField(fieldName, StringType, true)))
+
+    val crowRDD = colleges.map(_.split(" ")).map(c => Row(c(0), c(1).trim))
+
+    val clgDataFrame = sqlContext.createDataFrame(crowRDD, cschema)
+
+  clgDataFrame.registerTempTable("colleges")
+
+    val sschema = StructType(sschemaString.split(" ").map(fieldName => StructField(fieldName, StringType, true)))
+
+    val srowRDD = students.map(_.split(" ")).map(s => Row(s(0), s(1).trim))
+
+    val stuDataFrame = sqlContext.createDataFrame(srowRDD, sschema)
+
+  stuDataFrame.registerTempTable("students")
+
+  val results = sqlContext.sql("SELECT students.Student, colleges.city from students,colleges where students.college = colleges.College")
+
+  results.map(t => (t(1),t(0))).collect().foreach(println)
+
+--------------------------------------------------------------

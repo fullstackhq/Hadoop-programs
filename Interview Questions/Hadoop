@@ -1,0 +1,36 @@
+1. What is the difference between Hadoop and Traditional RDBMS?
+
+
+
+Datatypes	       Processes semi-structured and unstructured data.	                    Processes structured data.
+Schema	         Schema on Read	                                                      Schema on Write
+Best Fit for
+Applications	   Data discovery and Massive Storage/Processing of Unstructured data.	Best suited for OLTP and complex ACID transactions.
+Speed	           Writes are Fast	                                                    Reads are Fast
+
+2. What do the four V’s of Big Data denote?
+
+IBM has a nice, simple explanation for the four critical features of big data:
+a) Volume –Scale of data
+b) Velocity –Analysis of streaming data
+c) Variety – Different forms of data
+d) Veracity –Uncertainty of data
+------------
+Data Access Components are - Pig and Hive
+
+Data Storage Component is - HBase
+
+Data Integration Components are - Apache Flume, Sqoop, Chukwa
+
+Data Management and Monitoring Components are - Ambari, Oozie and Zookeeper.
+
+Data Serialization Components are - Thrift and Avro
+
+Data Intelligence Components are - Apache Mahout and Drill.
+--------
+The most common Input Formats defined in Hadoop are:
+
+Text Input Format- This is the default input format defined in Hadoop.
+Key Value Input Format- This input format is used for plain text files wherein the files are broken down into lines.
+Sequence File Input Format- This input format is used for reading files in sequence.
+--------

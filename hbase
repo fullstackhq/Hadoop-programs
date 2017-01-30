@@ -1,0 +1,20 @@
+  mr-jobhistory-daemon.sh start historyserver
+
+  cd hbase-1.0.0/bin
+./start-hbase.sh
+
+./hbase shell
+
+General:
+  status
+
+  count 'students',CACHE=>1000
+
+  val colleges = sc.textFile("/Users/janakiraman/Desktop/clg.txt").map(_.split(",")).map(clg => Colleges(clg(0).trim, clg(1), frt(2).trim)).toDF()
+val college = sc.textFile("/Users/janakiraman/Desktop/clg.txt").map(_.split(",")).map(p => College(p(0), p(1).trim.toInt)).toDF()
+
+
+val schema = StructType(schemaString.split(" ").map(fieldName => StructField(fieldName, StringType, true)))
+
+put, get, increment, scan and delete.
+describe, list, drop, disable and scan.

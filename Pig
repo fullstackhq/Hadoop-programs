@@ -1,0 +1,6 @@
+Load hdfs
+  a = Load '/jhony/students.txt' into Pigstorage("^");
+  a = Load '/jhony/students.txt' into Pigstorage("^") as (Name,Salary);
+
+
+  mr-jobhistory-daemon.sh start historyserver

@@ -1,0 +1,27 @@
+HBase should be used when the big data application has –
+
+1)A variable schema
+
+2)When data is stored in the form of collections
+
+3)If the application demands key based access to data while retrieving.
+
+Key components of HBase are –
+
+Region- This component contains memory data store and Hfile.
+
+Region Server-This monitors the Region.
+
+HBase Master-It is responsible for monitoring the region server.
+
+Zookeeper- It takes care of the coordination between the HBase Master component and the client.
+
+Catalog Tables-The two important catalog tables are ROOT and META.ROOT table tracks where the META table is and META table stores all the regions in the system.
+-----------
+Record Level Operational Commands in HBase are –put, get, increment, scan and delete.
+
+Table Level Operational Commands in HBase are-describe, list, drop, disable and scan.
+
+------------
+Every row in an HBase table has a unique identifier known as RowKey. It is used for grouping cells logically and it ensures that all cells that have the same RowKeys are co-located on the same server. RowKey is internally regarded as a byte array.
+------------
