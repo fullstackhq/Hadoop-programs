@@ -1,0 +1,25 @@
+Spark 2.0
+dataframes
+cassandra
+
+cloudera
+pig
+sqoop
+oozie
+
+
+
+cloudera
+
+Mainframe datasets get FTP'd by batch everyday to a folder
+
+Spark job picks up the file from that folder and puts it in Hdfs
+
+Scala job runs to extract needed data and pass it to reporting application folder
+
+
+
+
+Work
+
+DB2 ------ftp job----> Hdfs-----sqoop--->Hive----pig----spark---->output file

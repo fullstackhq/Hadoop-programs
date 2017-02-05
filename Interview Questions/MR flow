@@ -1,0 +1,17 @@
+1. Client submits the MR job
+2. YARN resource manager -> Allocates resources on the cluster
+3. YARN node managers -> launch and monitor the compute containers
+4. MR application master coordinates tasks running the MR job
+    App Master and MR tasks run in containers
+
+--------------
+
+submission -> initialization ->
+
+1. Submit() method -> creates jobsubmitter instance ->> calls submitJobInternal()
+
+  jobsubmitter --> asks resource manager for new app ID
+                   Computes input splits for the job
+                   copy reources for the job
+                      >> job jar copied with high replication factor(mapreduce.client.submit.file.replication = 10)
+                   submits job using submitApplication()
