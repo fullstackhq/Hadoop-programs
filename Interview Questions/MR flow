@@ -15,3 +15,51 @@ submission -> initialization ->
                    copy reources for the job
                       >> job jar copied with high replication factor(mapreduce.client.submit.file.replication = 10)
                    submits job using submitApplication()
+
+2. Resource manager receeives call to submitApplication() then it sends request to YARN scheduler
+   YARN scheduler allocates a container[ node manager managemt { resource manager launches ( App master's proces ) } ]
+   
+   
+   set numreducetasks -> mapreduce.job.reduces 
+   maximum mappers for uber task -> mapreduce.job.ubertask.maxmaps
+   number of reducesrs for uber task-> mapreduce.job.ubertask.maxreduces
+   bytes for uber task-> mapreduce.job.ubertask.maxbytes
+   
+   enable uber task -> mapreduce.job.ubertask.enable
+   
+   enable callback -> mapreduce.job.end-notification.url
+   
+   uber task
+  
+  steps:
+  1 -   run job
+  2 -   get new application 
+  3 -   get job related resources from HDFS
+  4 -   submit application
+  5 -   a   -   start container
+  5 -   b   -   launch
+  6 -   Initialize job
+  7 -   retrive input splits
+  8 -   allocate resources
+  9 -   a   -   start container
+  9 -   b   -   launch
+ 10 -   retrieve job resources
+ 11 -   run
+ 
+   --------------------
+Clients submit MapReduce job by interacting with Job objects, clients runs in its own JVM.
+Job’s code interact with Resource Manager to acquire application metadata such as application id.
+Job’s code move all job related resources to HDFS to make them available for rest of the job.
+Job’s code submits the application to Resource Manager.
+
+Resource Manager choses a Node manager with available resources and requests a container for MRAppMaster.
+Node manager allocates container for MRAppMaster; MRAppMaster will execute and co-ordinate MapReduce Job
+
+MRAppMaster grabs required resources from HDFS, such as input splits; these resources were copied in step 3.
+MRAppMaster negotiates with Resource Manager for available resources; Resource Manager will select Node Manager that has the most resources.
+MRAppMaster tells selected NodeManager to start Map and Reduce tasks.
+
+Node Manager creates YARN Child containers that will coordinate and run tasks.
+
+YARN Child acquires job resources from HDFS that will be required to execute Map and Reduce tasks.
+YARN Child executes Map and Reduce Tasks.
