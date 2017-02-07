@@ -1,0 +1,109 @@
+create table
+CREATE EXTERNAL TABLE external_table
+insert overwrite
+
+row format
+load data [local] inpath '...'
+overwrite into table...
+
+hive.metastore.warehouse.dir
+hive-site.xml  ---> cluster connection details(filesystem -> fs.defaultfs , resource manager -> yarn.resourcemanager.address)
+
+core-site.xml, hdfs-site.xml, mapredsite.xml, and yarn-site.xml
+core-default.xml, hdfs-default.xml,mapred-default.xml, and yarn-default.xml
+
+-hiveconf
+hive-default.xm
+hive --config
+set
+hive.execution.engine
+logging configuration is in conf/hive-log4j.properties
+hive -hiveconf hive.root.logger=DEBUG,console
+
+ARRAY, MAP, STRUCT, and UNION
+CREATE TABLE complex (
+c1 ARRAY<INT>,
+c2 MAP<STRING, INT>,
+c3 STRUCT<a:STRING, b:INT, c:DOUBLE>,
+c4 UNIONTYPE<STRING, INT>
+);
+
+cast
+
+managed table
+external table
+
+hive transform
+associate multiple schemas with the same dataset
+
+partitioned by
+
+CREATE TABLE logs (ts BIGINT, line STRING)
+PARTITIONED BY (dt STRING, country STRING);
+
+LOAD DATA LOCAL INPATH 'input/hive/partitions/file1'
+INTO TABLE logs
+PARTITION (dt='2001-01-01', country='GB');
+
+input pruning
+
+buckets
+
+CREATE TABLE bucketed_users (id INT, name STRING)
+CLUSTERED BY (id) INTO 4 BUCKETS;
+
+CREATE TABLE bucketed_users (id INT, name STRING)
+CLUSTERED BY (id) SORTED BY (id ASC) INTO 4 BUCKETS;
+
+map joins
+
+hive.enforce.bucketing
+
+SELECT * FROM bucketed_users
+TABLESAMPLE(BUCKET 1 OUT OF 4 ON id);
+
+Storage formats -> row format(SerDe) / file format
+Deserializer / quering a table
+serializer / insert or CTAS(Create table as select)
+
+
+hive.default.fileformat
+
+default row delimiter  ^A
+default collection item delimiter ^B
+default map key delimiter ^C
+
+CREATE TABLE ...
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\001'
+COLLECTION ITEMS TERMINATED BY '\002'
+MAP KEYS TERMINATED BY '\003'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+Sequence files, Avro datafiles, Parquet files, RCFiles, and ORCFiles
+
+row oriented format - Sequence files, Avro datafiles
+
+
+SET hive.exec.compress.output=true;
+SET avro.output.codec=snappy;
+CREATE TABLE ... STORED AS AVRO;
+
+stored by
+
+INSERT OVERWRITE TABLE target
+SELECT col1, col2
+FROM source;
+
+dynamic partitioning 
+
+INSERT OVERWRITE TABLE target
+PARTITION (dt)
+SELECT col1, col2, dt
+FROM source;
+
+
+
+
+
