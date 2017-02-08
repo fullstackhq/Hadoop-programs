@@ -22,7 +22,7 @@ Scala job runs to extract needed data and pass it to reporting application folde
 
 Work
 
-DB2 ------ftp job---->Business folder-> ----script----> Hdfs-----sqoop--->Hive----pig----spark---->output file
+DB2 ------ftp job---->Business folder-> ----script----> Hdfs-----sqoop--->Hive------spark dataframes processing---->output file
 
 
 Reporting tables
