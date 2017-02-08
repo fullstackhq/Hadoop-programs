@@ -104,6 +104,91 @@ SELECT col1, col2, dt
 FROM source;
 
 
+multitable insert
+
+FROM records2
+INSERT OVERWRITE TABLE stations_by_year
+SELECT year, COUNT(DISTINCT station)
+GROUP BY year
+INSERT OVERWRITE TABLE records_by_year
+SELECT year, COUNT(1)
+GROUP BY year
+INSERT OVERWRITE TABLE good_records_by_year
+SELECT year, COUNT(1)
+WHERE temperature
+
+
+CTAS -> Atomic
+
+how to alter a table’s structure, including adding and dropping
+partitions, changing and replacing columns, and changing table and SerDe properties
+
+drop table
+truncate table
+
+CREATE TABLE new_table LIKE existing_table;
+
+sorting
+  parallel sort - order by , group by
+  sort by 
+  distribute by
+  cluster by
+  
+hive> ADD FILE /Users/tom/book-workspace/hadoop-book/ch17-hive/
+src/main/python/is_good_quality.py;
+hive> FROM records2
+> SELECT TRANSFORM(year, temperature, quality)
+> USING 'is_good_quality.py'
+> AS year, temperature;
+
+FROM (
+FROM records2
+MAP year, temperature, quality
+USING 'is_good_quality.py'
+AS year, temperature) map_output
+REDUCE year, temperature
+USING 'max_temperature_reduce.py'
+AS year, temperature;
+
+select transform
+
+inner join
+SELECT sales.*, things.*
+> FROM sales JOIN things ON (sales.id = things.id);
+
+equijoins
+
+EXPLAIN - > abstract syntax tree, the dependency graph for the stages that Hive will
+execute, and information about each stage
+
+map join -- If one table is small enough to fit in memory, as things is here, Hive can load it into memory to perform the join in each of the mappers.
+
+SET hive.optimize.bucketmapjoin=true;
+
+SELECT station, year, AVG(max_temperature)
+FROM (
+SELECT station, year, MAX(temperature) AS max_temperature
+FROM records2
+WHERE temperature != 9999 AND quality IN (0, 1, 4, 5, 9)
+GROUP BY station, year
+) mt
+GROUP BY station, year;
+
+UDTF - need more learning
+
+
+CREATE FUNCTION strip AS 'com.hadoopbook.hive.Strip'
+USING JAR '/path/to/hive-examples.jar';
+
+ADD JAR /path/to/hive-examples.jar;
+CREATE TEMPORARY FUNCTION strip AS 'com.hadoopbook.hive.Strip';
+
+% hive --auxpath /path/to/hive-examples.jar
+HIVE_AUX_JARS_PATH
+
+
+
+************************************************************************************************************************************
 To enter into Hive Shell
 -------------------------
 Hive
