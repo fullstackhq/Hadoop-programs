@@ -104,6 +104,517 @@ SELECT col1, col2, dt
 FROM source;
 
 
+To enter into Hive Shell
+-------------------------
+Hive
+
+
+To use shell commands inside hive
+---------------------------------
+VM files can be accessed using commands inside hive
+
+!ls;
+
+!ls directoryname;
+Ex: !ls /home/cloudera/;
+
+
+To lists all the tables:
+------------------------
+show tables;
+
+To show a database:
+-----------------
+show databases;
+
+
+To create tables in it:
+--------------------------
+use databasename;
+
+Ex: use default;
+
+
+To get the structure of the tables;
+-----------------------------------
+describe tablename;
+Ex: describe posts;
+
+
+To see the data in table:
+--------------------------
+select * from tablename;
+Ex: select * from posts;
+
+----------------------------
+General Table and HDFS File
+------------------------------
+
+1.
+Hive> CREATE TABLE posts (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+!hadoop fs -ls /user/hive/warehouse
+!hadoop fs - ls /user/hive/warehouse/posts
+
+2.
+Hive> show tables;
+
+
+3.
+Hive> describe posts;
+
+
+4.
+hadoop fs -put /home/cloudera/posts.txt /user/cloudera/inputfiles/posts.txt
+!hadoop fs -ls /user/cloudera/inputfiles/
+
+Hive> LOAD DATA INPATH '/user/cloudera/inputfiles/posts.txt'
+OVERWRITE INTO TABLE posts;
+
+
+!hadoop fs -ls /user/cloudera/inputfiles/
+!hadoop fs - ls /user/hive/warehouse/posts
+
+
+5.
+Hive> select * from posts;
+
+
+6.
+Hive> drop table posts;
+Hive> Show tables;
+
+!hadoop fs - ls /user/hive/warehouse/posts
+!hadoop fs -ls /user/hive/warehouse
+
+
+----------------------------
+General Table and Local File
+------------------------------
+
+7.
+Hive > CREATE TABLE posts (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+
+8.
+hive> !ls /home/cloudera/;
+
+hive>!cat /home/cloudera/posts.txt;
+
+hive> LOAD DATA LOCAL INPATH '/home/cloudera/posts.txt'
+OVERWRITE INTO TABLE posts;
+
+hive>!cat /home/cloudera/posts.txt;
+
+!hadoop fs - ls /user/hive/warehouse/posts
+
+
+9.
+
+Hive> drop table posts;
+
+Hive> Show tables;
+hive> !ls /home/cloudera/;
+!hadoop fs -ls /user/hive/warehouse
+
+
+----------------------------
+External Table and HDFS File
+------------------------------
+
+10.
+Hive > CREATE EXTERNAL TABLE posts (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+!hadoop fs -ls /user/hive/warehouse
+
+
+11.
+
+hadoop fs -put /home/cloudera/posts.txt /user/cloudera/inputfiles/posts.txt
+
+
+Hive > LOAD DATA INPATH '/user/cloudera/inputfiles/posts.txt'
+OVERWRITE INTO TABLE posts;
+
+!hadoop fs -ls /user/cloudera/inputfiles/
+!hadoop fs - ls /user/hive/warehouse/posts
+
+12.
+Hive> drop table posts;
+
+Hive> Show tables;
+
+!hadoop fs - ls /user/hive/warehouse/posts
+
+
+----------------------------
+General Table and Local File
+------------------------------
+
+13.
+Hive > CREATE EXTERNAL TABLE posts (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+14.
+hive> LOAD DATA LOCAL INPATH '/home/cloudera/posts.txt'
+OVERWRITE INTO TABLE posts;
+
+hive>!cat /home/cloudera/posts.txt;
+
+
+15.
+Hive> drop table posts;
+
+Hive> Show tables;
+
+hive> !ls /home/cloudera/;
+
+!hadoop fs - ls /user/hive/warehouse/posts
+
+
+---------------------------------------
+External Table in other HDFS location
+--------------------------------------
+16.
+hive> CREATE EXTERNAL TABLE likes (user STRING, liker INT, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/cloudera/hivefiles';
+
+
+!hadoop fs -ls /user/cloudera/hivefiles
+
+
+17.
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/likes.txt'
+OVERWRITE INTO TABLE likes;
+
+!hadoop fs -ls /user/cloudera/hivefiles
+
+
+------------------
+Schema Violation
+-------------------
+18.
+CREATE TABLE postsinvalid (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+19.
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/postsinvalid.txt'
+OVERWRITE INTO TABLE posts;
+
+
+----------------------------
+Select - Conditionand Order By
+---------------------------
+20.
+select user from likes where liker>10 order by user desc;
+
+
+21.
+ALTER TABLE likes RENAME TO userlikes;
+
+show tables;
+
+
+
+22.
+ALTER TABLE userlikes CHANGE user username string;
+
+describe userlikes;
+
+
+23.
+ALTER TABLE userlikes add columns(usrid int);
+
+describe userlikes;
+select * from userlikes;
+
+
+24.
+select * from userlikes limit 2;
+
+
+25.
+Function commands:
+---------------------
+show functions;
+
+Gives short description of function:
+-----------------------------------
+describe function <functionname>;
+Ex: describe function upper;
+
+
+Gives full description of function:
+-----------------------------------
+describe function extended <functionname>;
+Ex: describe function extended upper;
+
+
+
+26.
+To execute hql file from hadoop shell
+-------------------------------------
+hive -f filename.hql
+
+
+
+27.
+To remove a column from table
+-----------------------------
+alter table userlikes replace columns(username string,liker int,time bigint);
+
+
+
+28.
+
+To find if a table is external/internal
+---------------------------------------
+describe formatted userlikes;
+
+
+For detailed information,
+
+describe extended userlikes;
+
+
+29.
+Swap tables
+-----------
+alter table userlikes set TBLPROPERTIES('EXTERNAL'='FALSE');
+
+describe formatted userlikes;
+
+
+alter table userlikes set TBLPROPERTIES('EXTERNAL'='true');
+
+describe formatted userlikes;
+
+
+
+----------
+Inner Join
+-----------
+30.
+CREATE EXTERNAL TABLE likes (user STRING, liker INT, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/likes.txt'
+OVERWRITE INTO TABLE likes;
+
+
+
+CREATE EXTERNAL TABLE posts (user STRING, post STRING, time BIGINT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+
+LOAD DATA LOCAL INPATH '/home/cloudera/posts.txt'
+OVERWRITE INTO TABLE posts;
+
+
+
+CREATE TABLE posts_likes (user STRING, post STRING, likes_count INT);
+
+INSERT OVERWRITE TABLE posts_likes
+SELECT p.user, p.post, l.liker
+FROM posts p JOIN likes l ON (p.user = l.user);
+
+
+select * from posts_likes;
+
+
+31.
+----------------------
+Joining Multiple Tables
+----------------------
+
+INSERT INTO TABLE posts_likes
+SELECT p.user, p.post, l.liker
+FROM posts p JOIN likes l ON (p.user = l.user) JOIN userlikes ul ON (p.time=ul.time);
+
+
+select * from posts_likes;
+
+
+
+--------------
+Outer Join
+--------------
+
+32.
+
+SELECT p.*, l.*
+FROM posts p LEFT OUTER JOIN likes l ON (p.user = l.user);
+
+
+
+33.
+SELECT p.*, l.*
+FROM posts p RIGHT OUTER JOIN likes l ON (p.user = l.user);
+
+
+34.
+SELECT p.*, l.*
+FROM posts p FULL OUTER JOIN likes l ON (p.user = l.user);
+
+
+---------
+Partition
+----------
+35.
+
+CREATE TABLE posts (user STRING, post STRING, time BIGINT)
+PARTITIONED BY (country STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+show partitions posts;
+
+!hadoop fs -ls /user/hive/warehouse/posts;
+
+
+
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/posts_us.txt'
+OVERWRITE INTO TABLE posts PARTITION (country='US');
+
+
+show partitions posts;
+!hadoop fs -ls /user/hive/warehouse/posts;
+!hadoop fs -ls /user/hive/warehouse/posts/country=US
+
+
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/posts_aus.txt'
+OVERWRITE INTO TABLE posts PARTITION (country='AUSTRALIA');
+
+
+show partitions posts;
+!hadoop fs -ls /user/hive/warehouse/posts;
+
+
+select * from posts where country='US';
+
+select * from posts where country='AUSTRALIA';
+
+
+
+35.
+
+To drop a partiton
+------------------
+ALTER TABLE posts DROP IF EXISTS PARTITION(country='US') ;
+
+!hadoop fs -ls /user/hive/warehouse/posts;
+Folder will not be there
+
+
+show partitions posts;
+partition US will not be displayed
+
+
+
+
+36.
+to add a partition
+------------------
+alter table posts add partition (country='US') location '/user/hive/warehouse/posts/us';
+
+!hadoop fs -ls /user/hive/warehouse/posts;
+US partition folder would be displayed.
+
+show partitions posts;
+
+
+LOAD DATA LOCAL INPATH '/home/cloudera/inputfiles/posts_us.txt'
+OVERWRITE INTO TABLE posts PARTITION (country='US');
+
+
+select * from posts where country='US';
+
+
+37.
+To check any problem on partition
+----------------------------------
+MSCK repair table posts;
+
+
+
+38.
+----------
+Bucketing
+------------
+
+CREATE TABLE posts_bucket(user STRING, post STRING, time BIGINT)
+PARTITIONED BY (country STRING)
+CLUSTERED BY(time) INTO 5 BUCKETS;
+
+set hive.enforce.bucketing = true;
+
+
+-----
+-----
+-----
+Hive Exercise
+The input data files required to do the following exercises are available in the inputfiles folder. Ensure to execute the following points in sequence, do not skip any points:
+1.	Create table employee. Please define the schema by referring the emp.txt file. Emp.txt file’s 1st column represents name, 2nd column age, 3rd column salary and 4th column represents date of join. Display the table name. Display the table schema.
+
+2.	Check whether hive created directory for the above employee table.
+
+3.	Load emp.txt file from local to the employee table. Display all the records of employee table.
+
+4.	Check whether hive stored the data loaded into employee table in form of file. If so, display the content of the emp.txt file. Compare the output of the file and the table employee and ensure both are matching.
+
+5.	Drop the table employee. Check table name removed.
+
+6.	Check whether hive deleted the emp.txt file.
+
+7.	Check whether hive deleted directory created for employee table.
+
+8.	Create table employee. Please define the schema by referring the emp.txt file. Emp.txt file’s 1st column represents name, 2nd column age, 3rd column salary and 4th column represents date of join. Display the table name. Display the table schema.
+
+9.	Check whether hive created directory for the above employee table.
+
+10.	Load emp.txt file from hdfs to the employee table. Display all the records of employee table. (Note: Before Load ensure that the emp.txt file available in HDFS).
+
+11.	Check whether hive stored the data loaded into employee table in form of file. If so, display the content of the emp.txt file. Compare the output of the file and the table employee and ensure both are matching.
+
+12.	Drop the table employee. Check table name removed.
+
+13.	Check whether hive deleted the emp.txt file.
+
+14.	Check whether hive deleted directory created for employee table.
+
+15.	Create table employee as EXTERNAL. Please define the schema by referring the emp.txt file. Emp.txt file’s 1st column represents name, 2nd column age, 3rd column salary and 4th column represents date of join. LOCATION use “/tmp/emp”. Display the table name. Display the table schema.
+
+16.	Check whether “/tmp/emp” directory created in the hadoop system root directory for the above employee EXTERNAL table.
+
+17.	Load emp.txt file from local to the employee table. Display all the records of employee table.
+
+18.	Check whether the data loaded into employee table stored in “/tmp/emp/” directory in the form of file. If so, display the content of this emp.txt file. Compare the output of the file and the table employee and ensure both are matching.
+
+19.	Check in the directory ‘/user/hive/warehouse’ any directory created in the name of employee. Definitely there should not any directory in the name of employee.
 
 
 
