@@ -1,0 +1,25 @@
+cluster compute layer
+
+resource manager - 1 per cluster - to manage use of resources across cluster
+node managers - runs on all nodes of the cluster - To launch and monitor containers
+
+container -> executes an app specific process with constrained set of resources
+
+Unix process
+Linux cgroup
+
+
+1.  Client contacts resource manager and asks it to run a app master process
+2.  resource manager -> finds a node manager that can run the app master in its container
+
+DAG
+
+MapReduce 1                   YARN
+Jobtracker                    Resource manager, application master, timeline server
+Tasktracker                   Node manager
+Slot                          Container
+
+FIFO scheduler
+Capacity scheduler
+Fair Scheduler
+
