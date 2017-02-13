@@ -6,6 +6,16 @@
 10 Oozie
 11 Scala
 12 Sqoop
+
+-----
+mapreduce,hive,shell scripting,spark,spark dataframes
+----
+13 mapreduce
+15 shell scripting
+16 hive
+17 spark
+20 dataframes
+------
 13 Pig
 14 Hive
 15 Scala
