@@ -1,0 +1,20 @@
+workflow engine - stores and runs workflows composed of different types of hadoop jobs
+coordinator engine -  runs workflow jobs based on predefined schedules and data availability
+
+job control runs on the client machine
+but
+oozie runs as a service in the cluster and client submits workflow definitions
+
+Workflow = dag of action nodes and control-flow nodes
+
+action node - performs a workflow task, 
+
+              such as moving files in HDFS; 
+              running a MapReduce, Streaming, Pig, or Hive job; 
+              performing a Sqoop import; or 
+              running an arbitrary shell script/Java program.
+              
+control-flow node - governs the workflow execution
+
+callback
+polling
