@@ -15,15 +15,11 @@ mapreduce,hive,shell scripting,spark,spark dataframes
 17 hive
 20 spark
 21 dataframes
-------
-13 Pig
-14 Hive
-15 Scala
-16 Flume
-17 Kafka
-19 Zookeeper
-20 Mapreduce
-21 Spark
-22 Scala
-23 Yarn/oozie/Zookeeper
-24 Pig/Sqoop/Hive
+22 mapreduce 
+23 hive
+24 Pig/Sqoop
+27 Yarn/oozie/Zookeeper
+28 Scala,Java
+1  Flume/kafka
+
+
