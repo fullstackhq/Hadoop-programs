@@ -26,3 +26,16 @@ A new class must be created that extends the pre-defined Partitioner Class.
 getPartition method of the Partitioner class must be overridden.
 The custom partitioner to the job can be added as a config file in the wrapper which runs Hadoop MapReduce or the custom partitioner can be added to the job by using the set method of the partitioner class.
 ------------
+
+Mapreduce dataflow:
+
+
+Client application submit jobs to the job tracker
+JobTracker communicates to the Namemode to determine data location
+Near the data or with available slots JobTracker locates TaskTracker nodes
+On chosen TaskTracker Nodes, it submits the work
+When a task fails, Job tracker notify and decides what to do then.
+The TaskTracker nodes are monitored by JobTracker
+
+
+  
