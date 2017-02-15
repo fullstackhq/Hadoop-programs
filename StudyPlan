@@ -10,11 +10,11 @@
 -----
 mapreduce,hive,shell scripting,spark,spark dataframes
 ----
-13 mapreduce
-15 shell scripting
-16 hive
-17 spark
-20 dataframes
+15 mapreduce
+16 shell scripting
+17 hive
+20 spark
+21 dataframes
 ------
 13 Pig
 14 Hive
