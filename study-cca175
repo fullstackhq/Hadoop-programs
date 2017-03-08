@@ -10,7 +10,7 @@ The skills to transfer data between external systems and your cluster. This incl
 
 Transform, Stage, Store
 
-  Convert a set of data values in a given format stored in HDFS into new data values and/or a new data format and write them into HDFS. This includes writing Spark applications in both Scala and Python:
+    Convert a set of data values in a given format stored in HDFS into new data values and/or a new data format and write them into HDFS. This includes writing Spark applications in both Scala and Python:
     Load data from HDFS and store results back to HDFS using Spark
     Join disparate datasets together using Spark
     Calculate aggregate statistics (e.g., average or sum) using Spark

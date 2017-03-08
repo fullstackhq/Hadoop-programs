@@ -18,22 +18,22 @@ submission -> initialization ->
 
 2. Resource manager receeives call to submitApplication() then it sends request to YARN scheduler
    YARN scheduler allocates a container[ node manager managemt { resource manager launches ( App master's proces ) } ]
-   
-   
-   set numreducetasks -> mapreduce.job.reduces 
+
+
+   set numreducetasks -> mapreduce.job.reduces
    maximum mappers for uber task -> mapreduce.job.ubertask.maxmaps
    number of reducesrs for uber task-> mapreduce.job.ubertask.maxreduces
    bytes for uber task-> mapreduce.job.ubertask.maxbytes
-   
+
    enable uber task -> mapreduce.job.ubertask.enable
-   
+
    enable callback -> mapreduce.job.end-notification.url
-   
+
    uber task
-  
+
   steps:
   1 -   run job
-  2 -   get new application 
+  2 -   get new application
   3 -   get job related resources from HDFS
   4 -   submit application
   5 -   a   -   start container
@@ -45,7 +45,7 @@ submission -> initialization ->
   9 -   b   -   launch
  10 -   retrieve job resources
  11 -   run
- 
+
    --------------------
 Clients submit MapReduce job by interacting with Job objects, clients runs in its own JVM.
 Job’s code interact with Resource Manager to acquire application metadata such as application id.
