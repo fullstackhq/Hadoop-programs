@@ -22,9 +22,28 @@ Scala job runs to extract needed data and pass it to reporting application folde
 
 Work
 
-DB2 ------ftp job---->Business folder-> ----script----> Hdfs-----sqoop--->Hive------spark dataframes processing---->output file
+DB2 ------ftp job---->Business folder-> ----script----> Hdfs-----shell script--->Hive/spark dataframes processing---->output file
+
+1. Mainframe batch runs early morning between 5 and 6.
+2. Files get FTP''d to the respective locations
+
+3. System takes these files from the FTP locations into Hive
+    We use shell scripting to put files into hdfs
+    Validations need to be done on the file before putting into hdfs
+
+4. Hive queries run to take required data to be sent to client
+4b. Sometimes we write spark dataframes to get data to client.
+
+5. Output files of hive queries/dataframes send to destination folder.
+
+Sample requirements
+1. Increase NDG length
+2. Data from queue without new line
+3. adding prefix zeros to ndg
+
 
 
 Reporting tables
+Activity details
 
 Daily batch ftp's reporting file to particular folder location

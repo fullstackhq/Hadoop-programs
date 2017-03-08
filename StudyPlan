@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 --5 Mapreduce
 6 Mapreduce
 --7 Hive
@@ -12,14 +13,14 @@ mapreduce,hive,shell scripting,spark,spark dataframes
 ----
 15 mapreduce - interview q(office) , programs(home)
 16 mapreduce - data flow(office), int question(home
-17 
+17
 
 
 
 17 hive
 20 spark
 21 dataframes
-22 mapreduce 
+22 mapreduce
 23 hive
 24 Pig/Sqoop
 27 Yarn/oozie/Zookeeper
@@ -27,3 +28,28 @@ mapreduce,hive,shell scripting,spark,spark dataframes
 1  Flume/kafka
 
 
+=======
+work
+  hive
+
+knowledge
+  yarn
+  mapreduce
+  spark
+  sqoop
+  oozie
+
+light knowledge
+  kafka
+  flume
+  scala
+  hbase
+
+
+march
+28,1,2,3,4 - java
+5 - 11 - mapreduce
+12 - 18 - hive
+19 - 25 - spark
+26 - 31 - big data interview questions
+>>>>>>> Stashed changes

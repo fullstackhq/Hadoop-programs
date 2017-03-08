@@ -7,7 +7,12 @@ When the jar is not running giveing error as ->
 Spark submit java code:
 
   ./spark-submit --class org.sparkexample.WordCount --master local[2] /Users/janakiraman/Documents/workspace/spark-examples/out/artifacts/spark_examples_jar/spark-examples.jar /Users/janakiraman/Desktop/students.txt /Users/janakiraman/Desktop/newlen
+  ./spark-submit --deploy-mode cluster --class org.sparkexample.WordCount --master spark://localhost:6066 /Users/janakiraman/Documents/workspace/spark-examples/out/artifacts/spark_examples_jar/spark-examples.jar /jhony/mahabhara.txt /jhony/newlen/
+
 
   zip -d /Users/janakiraman/Documents/workspace/Wc/out/artifacts/wc_jar/wc.jar META-INF/*.RSA META-INF/*.DSA META-INF/*.SF
 
   ./spark-submit --class com.oreilly.learningsparkexamples.scala.WordCount --master local[2] /Users/janakiraman/Documents/workspace/learningsparkminiexample/out/artifacts/learningsparkminiexample_jar/learningsparkminiexample.jar /Users/janakiraman/Desktop/students.txt /Users/janakiraman/Desktop/out
+
+
+  ./spark-submit --class org.sparkexample.WordCount --master /Users/janakiraman/Documents/workspace/spark-examples/out/artifacts/spark_examples_jar/spark-examples.jar hdfs:///jhoy/mahabharat.txt /jhony/newlen
